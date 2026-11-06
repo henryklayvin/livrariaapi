@@ -4,6 +4,7 @@ import io.github.livrariaapi.livrariaapi.model.Livro;
 import io.github.livrariaapi.livrariaapi.repository.LivroRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -36,5 +37,10 @@ public class LivroController {
     public void atualizarLivro(@PathVariable("id") String id, @RequestBody Livro livro){
         livro.setId(id);
         livroRepository.save(livro);
+    }
+
+    @GetMapping
+    public List<Livro> pesquisarLivroPorTitulo(@RequestParam("titulo") String titulo){
+        return livroRepository.findByTituloIgnoreCase(titulo);
     }
 }
