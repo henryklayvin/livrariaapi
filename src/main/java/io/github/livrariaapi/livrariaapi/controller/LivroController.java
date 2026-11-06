@@ -31,4 +31,10 @@ public class LivroController {
     public void excluirLivro(@PathVariable("id") String id){
         livroRepository.deleteById(id);
     }
+
+    @PutMapping("{id}")
+    public void atualizarLivro(@PathVariable("id") String id, @RequestBody Livro livro){
+        livro.setId(id);
+        livroRepository.save(livro);
+    }
 }
