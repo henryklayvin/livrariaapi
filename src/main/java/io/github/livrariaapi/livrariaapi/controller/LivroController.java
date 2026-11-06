@@ -1,17 +1,24 @@
 package io.github.livrariaapi.livrariaapi.controller;
 
+import io.github.livrariaapi.livrariaapi.model.Livro;
 import io.github.livrariaapi.livrariaapi.repository.LivroRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
-@RequestMapping("livro")
+@RequestMapping("livros")
 public class LivroController {
-    private LivroRepository livroRepository;
+    private final LivroRepository livroRepository;
 
     public LivroController(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
     }
 
+    @PostMapping
+    public Livro cadastrarLivro(@RequestBody Livro livro){
+        livro.setId(UUID.randomUUID().toString());
 
+        return livroRepository.save(livro);
+    }
 }
