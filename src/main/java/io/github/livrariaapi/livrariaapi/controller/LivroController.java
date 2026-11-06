@@ -26,4 +26,9 @@ public class LivroController {
     public Livro consultarPorId(@PathVariable("id") String id){
         return livroRepository.findById(id).orElse(null);
     }
+
+    @DeleteMapping("{id}")
+    public void excluirLivro(@PathVariable("id") String id){
+        livroRepository.deleteById(id);
+    }
 }
