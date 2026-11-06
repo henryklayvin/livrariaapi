@@ -21,4 +21,9 @@ public class LivroController {
 
         return livroRepository.save(livro);
     }
+
+    @GetMapping("{id}")
+    public Livro consultarPorId(@PathVariable("id") String id){
+        return livroRepository.findById(id).orElse(null);
+    }
 }
